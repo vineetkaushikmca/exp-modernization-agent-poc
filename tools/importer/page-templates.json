@@ -1,51 +1,31 @@
 {
   "templates": [
     {
-      "name": "homepage",
+      "name": "deals-corner",
       "urls": [
-        "https://wknd-trendsetters.site/"
+        "https://all.accor.com/a/en/deals-corner.html"
       ],
-      "description": "WKND Trendsetters homepage with hero, featured content, testimonials, articles, and FAQ sections",
+      "description": "Accor deals and promotions landing page showcasing current offers and special rates",
       "blocks": [
         {
           "name": "hero",
           "instances": [
-            "header.section.secondary-section > .container",
-            "section.section.inverse-section > .container"
-          ]
-        },
-        {
-          "name": "columns",
-          "instances": [
-            "main > section:nth-of-type(1) .grid-layout"
+            ".cmp-headingpagehero"
           ]
         },
         {
           "name": "cards",
           "instances": [
-            "main > section:nth-of-type(2) .grid-layout.desktop-4-column",
-            "main > section:nth-of-type(4) .grid-layout.desktop-4-column"
-          ]
-        },
-        {
-          "name": "tabs",
-          "instances": [
-            ".tabs-wrapper"
-          ]
-        },
-        {
-          "name": "accordion",
-          "instances": [
-            ".faq-list"
+            ".target.parbase"
           ]
         }
       ],
       "sections": [
         {
           "id": "section-1",
-          "name": "Hero Header",
-          "selector": "header.section.secondary-section",
-          "style": "light-grey",
+          "name": "Hero Banner",
+          "selector": ".heading-hero",
+          "style": null,
           "blocks": [
             "hero"
           ],
@@ -53,70 +33,11 @@
         },
         {
           "id": "section-2",
-          "name": "Featured Article",
-          "selector": "main > section:nth-of-type(1)",
+          "name": "Deals Cards",
+          "selector": ".target.parbase",
           "style": null,
-          "blocks": [
-            "columns"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "section-3",
-          "name": "Photo Gallery",
-          "selector": "main > section:nth-of-type(2)",
-          "style": "light-grey",
           "blocks": [
             "cards"
-          ],
-          "defaultContent": [
-            "main > section:nth-of-type(2) h2.h2-heading",
-            "main > section:nth-of-type(2) p.paragraph-lg"
-          ]
-        },
-        {
-          "id": "section-4",
-          "name": "Testimonials",
-          "selector": "main > section:nth-of-type(3)",
-          "style": null,
-          "blocks": [
-            "tabs"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "section-5",
-          "name": "Latest Articles",
-          "selector": "main > section:nth-of-type(4)",
-          "style": "light-grey",
-          "blocks": [
-            "cards"
-          ],
-          "defaultContent": [
-            "main > section:nth-of-type(4) h2.h2-heading",
-            "main > section:nth-of-type(4) p.paragraph-lg"
-          ]
-        },
-        {
-          "id": "section-6",
-          "name": "FAQ",
-          "selector": "main > section:nth-of-type(5)",
-          "style": null,
-          "blocks": [
-            "accordion"
-          ],
-          "defaultContent": [
-            "main > section:nth-of-type(5) h2.h2-heading",
-            "main > section:nth-of-type(5) p.subheading"
-          ]
-        },
-        {
-          "id": "section-7",
-          "name": "CTA Banner",
-          "selector": "section.section.inverse-section",
-          "style": "dark",
-          "blocks": [
-            "hero"
           ],
           "defaultContent": []
         }

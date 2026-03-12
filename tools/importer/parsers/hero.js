@@ -3,53 +3,49 @@
 
 /**
  * Parser for hero block.
- * Base: hero. Source: https://wknd-trendsetters.site/
+ * Base: hero. Source: https://all.accor.com/a/en/deals-corner.html
  *
- * Two instances:
- *   1. Header hero (header.section.secondary-section > .container):
- *      H1 + subheading + 2 CTA buttons + 3 content images
- *   2. CTA banner (section.section.inverse-section > .container):
- *      Background image with overlay + H2 + subheading + CTA button
+ * Source DOM structure (.cmp-headingpagehero):
+ *   .cmp-headingpagehero--fullWidth .ace-image-v2 picture  → background image
+ *   .cmp-headingpagehero-kicker span                       → eyebrow "Great deals"
+ *   .cmp-headingpagehero-title h1                           → heading "Our offers"
+ *   .cmp-headingpagehero-decription span p                  → description paragraph
  *
- * Target table structure (from Block Collection):
- *   Row 1: Image (optional - background or content images)
- *   Row 2: Heading + subheading + CTA buttons
+ * Target block table (1 col, 3 rows per block library):
+ *   Row 1: block name
+ *   Row 2: background image (picture element)
+ *   Row 3: heading + subheading + description (wrapped in container div)
  */
 export default function parse(element, { document }) {
-  // Find heading (h1 for header hero, h2 for CTA banner)
-  const heading = element.querySelector('h1, h2');
+  // Extract background image
+  const bgImage = element.querySelector('.cmp-headingpagehero--fullWidth picture, .ace-image-v2 picture, picture');
 
-  // Find subheading
-  const subheading = element.querySelector('p.subheading');
-
-  // Find CTA buttons
-  const buttons = Array.from(element.querySelectorAll('.button-group a.button'));
-
-  // Check for background/overlay image (CTA banner - has utility-overlay class)
-  const bgImage = element.querySelector('img.utility-overlay');
-
-  // Content images (header hero - images in nested grid)
-  const contentImages = bgImage
-    ? []
-    : Array.from(element.querySelectorAll('img.cover-image'));
+  // Extract text content
+  const eyebrow = element.querySelector('.cmp-headingpagehero-kicker span, .cmp-headingpagehero-kicker');
+  const heading = element.querySelector('.cmp-headingpagehero-title h1, .cmp-headingpagehero-title h2, h1, h2');
+  const description = element.querySelector('.cmp-headingpagehero-decription p, .cmp-headingpagehero-decription span p, p');
 
   const cells = [];
 
-  // Row 1: Image(s) if present
+  // Row 1: background image (optional)
   if (bgImage) {
     cells.push([bgImage]);
-  } else if (contentImages.length > 0) {
-    const container = document.createElement('div');
-    contentImages.forEach((img) => container.appendChild(img));
-    cells.push([container]);
   }
 
-  // Row 2: Content (heading + subheading + CTAs) wrapped in single container
+  // Row 2: content (heading + description wrapped in container div)
   const contentContainer = document.createElement('div');
-  if (heading) contentContainer.appendChild(heading);
-  if (subheading) contentContainer.appendChild(subheading);
-  buttons.forEach((btn) => contentContainer.appendChild(btn));
-  if (contentContainer.childNodes.length > 0) cells.push([contentContainer]);
+  if (eyebrow) {
+    const eyebrowP = document.createElement('p');
+    eyebrowP.textContent = eyebrow.textContent.trim();
+    contentContainer.append(eyebrowP);
+  }
+  if (heading) {
+    contentContainer.append(heading);
+  }
+  if (description) {
+    contentContainer.append(description);
+  }
+  cells.push([contentContainer]);
 
   const block = WebImporter.Blocks.createBlock(document, { name: 'hero', cells });
   element.replaceWith(block);
