@@ -1,0 +1,39 @@
+{
+  "templates": [
+    {
+      "name": "deals-corner",
+      "urls": [
+        "https://all.accor.com/a/en/deals-corner.html"
+      ],
+      "description": "Accor deals and promotions landing page showcasing current offers and special rates",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [".cmp-headingpagehero"]
+        },
+        {
+          "name": "cards",
+          "instances": [".target.parbase"]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero Banner",
+          "selector": ".heading-hero",
+          "style": null,
+          "blocks": ["hero"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Deals Cards",
+          "selector": ".target.parbase",
+          "style": null,
+          "blocks": ["cards"],
+          "defaultContent": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://all.accor.com/a/en/deals-corner.html",
+  "path": "a/en/deals-corner",
+  "timestamp": "2026-03-12T12:34:02.916Z",
+  "title": "ALL our offers",
+  "template": "deals-corner",
+  "blocks": [
+    "hero",
+    "cards"
+  ]
+}
